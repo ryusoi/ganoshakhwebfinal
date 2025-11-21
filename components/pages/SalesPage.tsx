@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { translations } from '../../translations';
 import InstagramIcon from '../icons/InstagramIcon';
+import WhatsappIcon from '../icons/WhatsappIcon';
 
 const SalesPage: React.FC = () => {
   const [currentLang, setCurrentLang] = useState<'en' | 'fa' | 'es'>('fa');
@@ -79,6 +80,18 @@ const SalesPage: React.FC = () => {
                 box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
                 background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(0,0,0,0.8));
             }
+            .btn-vivid-green {
+                background-color: #25D366;
+                color: white;
+                box-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
+                border: 1px solid rgba(255,255,255,0.2);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .btn-vivid-green:hover {
+                background-color: #128C7E;
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 0 25px rgba(37, 211, 102, 0.8);
+            }
         `}</style>
 
       {/* Hero Section */}
@@ -128,6 +141,7 @@ const SalesPage: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {teamMembers.map((member) => {
                     const isHeadOfSales = member.id === 2 || member.id === 3;
+                    const isFiroozeh = member.id === 2;
                     
                     return (
                         <div 
@@ -156,6 +170,21 @@ const SalesPage: React.FC = () => {
                                     {member.bio}
                                 </p>
                                 
+                                {/* Mrs. Firoozeh Parvin WhatsApp Button */}
+                                {isFiroozeh && (
+                                    <div className="mt-8">
+                                        <a 
+                                            href="https://wa.me/989363797018" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-3 btn-vivid-green font-bold py-3 px-8 rounded-full text-lg w-full justify-center sm:w-auto"
+                                        >
+                                            <WhatsappIcon className="w-6 h-6" />
+                                            WhatsApp
+                                        </a>
+                                    </div>
+                                )}
+
                                 {/* Special CTA for Star Performer */}
                                 {member.isStar && (
                                     <div className="mt-8">

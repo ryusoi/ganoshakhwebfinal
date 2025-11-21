@@ -33,6 +33,28 @@ const FadeInSection: React.FC<{ children: React.ReactNode, className?: string, d
     );
 }
 
+const AcknowledgementSection: React.FC<{ t: any }> = ({ t }) => {
+    return (
+        <div className="max-w-4xl mx-auto px-6 -mt-12 relative z-20">
+            <div className="relative group p-[2px] rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.01] transition-transform duration-500">
+                {/* Dynamic Shining Border */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/80 to-transparent animate-border-flow" style={{ backgroundSize: '200% 200%' }}></div>
+                
+                {/* Inner Content Box */}
+                <div className="relative bg-stone-900/95 backdrop-blur-xl rounded-2xl p-8 sm:p-10 text-center border border-amber-500/30">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 mb-6 tracking-wide drop-shadow-md">
+                        {t.invest_ack_title}
+                    </h3>
+                    <p className="text-lg sm:text-xl text-stone-200 leading-loose font-medium">
+                        {t.invest_ack_text}
+                    </p>
+                    <div className="mt-6 w-24 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto rounded-full opacity-50"></div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 // --- SVG Charts Components ---
 const LineChartSVG = () => (
     <svg viewBox="0 0 500 200" className="w-full h-full overflow-visible">
@@ -140,10 +162,18 @@ const InvestmentPage: React.FC<InvestmentPageProps> = ({ t, language }) => {
         @keyframes shine {
             to { background-position: 200% center; }
         }
+        @keyframes borderFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animate-border-flow {
+            animation: borderFlow 4s ease infinite;
+        }
       `}</style>
 
       {/* 1. HERO SECTION */}
-      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden pb-16">
         <div className="absolute top-[-10%] left-0 w-full h-[120%] z-0 pointer-events-none" style={{ transform: `translateY(${offset * 0.5}px)` }}>
           <video src={videoUrl} autoPlay loop muted playsInline className="w-full h-full object-cover opacity-60" />
         </div>
@@ -167,8 +197,11 @@ const InvestmentPage: React.FC<InvestmentPageProps> = ({ t, language }) => {
         </div>
       </section>
 
+      {/* 1.5 ACKNOWLEDGEMENT SECTION */}
+      <AcknowledgementSection t={t} />
+
       {/* 2. MARKET EXPLOSION */}
-      <section className="py-24 bg-stone-950 relative">
+      <section className="py-24 bg-stone-950 relative pt-32">
           <div className="max-w-6xl mx-auto px-6">
               <FadeInSection>
                   <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">
